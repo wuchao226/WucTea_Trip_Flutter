@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trip_flutter/mvvm/login/views/login_page.dart';
-import 'package:trip_flutter/page/home_page.dart';
+import 'package:trip_flutter/mvvm/main/views/bottom_tab_view.dart';
 
 class NavigatorUtil {
   ///用于在获取不到context的地方，如dao中跳转页面时使用，需要在TabNavigator赋值
@@ -19,7 +19,7 @@ class NavigatorUtil {
   ///跳转到首页
   static goToHome(BuildContext context) {
     // 跳转到主页并不让返回
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BottomTabView()));
   }
 
   ///跳转到登录页

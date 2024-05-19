@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hi_cache/flutter_hi_cache.dart';
 import 'package:trip_flutter/dao/login_dao.dart';
 import 'package:trip_flutter/mvvm/login/views/login_page.dart';
-import 'package:trip_flutter/page/home_page.dart';
+import 'package:trip_flutter/mvvm/main/views/bottom_tab_view.dart';
+import 'package:trip_flutter/util/screen_adapter_helper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,10 +25,11 @@ class MyApp extends StatelessWidget {
           future: HiCache.preInit(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
+              ScreenHelper.init(context);
               if (LoginDao.getBoardingPass() == null) {
                 return const LoginPage();
               } else {
-                return const HomePage();
+                return const BottomTabView();
               }
             } else {
               return const Scaffold(

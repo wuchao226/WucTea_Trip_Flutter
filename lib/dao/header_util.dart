@@ -7,4 +7,5 @@ hiHeaders() {
     "course-flag": 'ft',
     "boarding-pass": LoginDao.getBoardingPass() ?? ""
   };
+  return header;
 }
