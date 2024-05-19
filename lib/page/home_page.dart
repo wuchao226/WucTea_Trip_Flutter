@@ -15,7 +15,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     "https://o.devio.org/images/fa/cat-4098058__340.webp",
     "https://o.devio.org/images/fa/photo-1601513041797-a79a526a521e.webp",
     "https://o.devio.org/images/other/as-cover.png",
-    "https://o.devio.org/images/other/rn-cover2.ong",
   ];
   get _logoutBtn => TextButton(
         onPressed: () {
