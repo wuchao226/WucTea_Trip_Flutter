@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:trip_flutter/dao/home_dao.dart';
 import 'package:trip_flutter/dao/login_dao.dart';
 import 'package:trip_flutter/model/home_model.dart';
+import 'package:trip_flutter/page/search_page.dart';
+import 'package:trip_flutter/util/navigator_util.dart';
+import 'package:trip_flutter/util/view_util.dart';
 import 'package:trip_flutter/widget/banner_widget.dart';
 import 'package:trip_flutter/widget/grid_nav_widget.dart';
 import 'package:trip_flutter/widget/loading_container.dart';
 import 'package:trip_flutter/widget/local_nav_widget.dart';
 import 'package:trip_flutter/widget/sales_box_widget.dart';
+import 'package:trip_flutter/widget/search_bar_widget.dart';
 import 'package:trip_flutter/widget/sub_nav_widget.dart';
+
+const searchBarDefaultText = '网红打开地 景点 酒店 美食';
 
 class HomePage extends StatefulWidget {
   static Config? configModel;
@@ -44,18 +50,29 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         ),
       );
 
-  get _appBar => Opacity(
-        opacity: appBarAlpha,
-        child: Container(
-          height: 80,
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(color: Colors.white),
-          child: const Padding(
-            padding: EdgeInsets.only(top: 20),
-            child: Text('首页'),
+  get _appBar {
+    //获取刘海屏实际的Top 安全边距
+    double top = MediaQuery.of(context).padding.top;
+    return Column(
+      children: [
+        shadowWrap(
+            child: Container(
+          height: 60 + top,
+          decoration: BoxDecoration(
+            color: Color.fromARGB((appBarAlpha * 255).toInt(), 255, 255, 255),
           ),
-        ),
-      );
+          child: SearchBarWidget(
+            searchBarType: appBarAlpha > 0.2 ? SearchBarType.homeLight : SearchBarType.home,
+            inputBoxClick: _jumpToSearch,
+            defaultText: searchBarDefaultText,
+            rightButtonClick: () {
+              LoginDao.logOut();
+            },
+          ),
+        ))
+      ],
+    );
+  }
 
   get _listView => ListView(
         children: [
@@ -152,5 +169,9 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         _loading = false;
       });
     }
+  }
+
+  void _jumpToSearch() {
+    NavigatorUtil.push(context, const SearchPage());
   }
 }
