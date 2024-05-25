@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:trip_flutter/mvvm/login/views/login_page.dart';
 import 'package:trip_flutter/mvvm/main/views/bottom_tab_view.dart';
 
@@ -6,6 +7,7 @@ class NavigatorUtil {
   ///用于在获取不到context的地方，如dao中跳转页面时使用，需要在TabNavigator赋值
   ///注意：若TabNavigator被销毁，_context将无法使用
   static BuildContext? _context = null;
+
   static void updateContext(BuildContext? context) {
     NavigatorUtil._context = context;
     print('init:$context');
@@ -14,6 +16,16 @@ class NavigatorUtil {
   ///跳转到指定页面
   static push(BuildContext context, Widget page) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  }
+
+  ///返回上一页
+  static pop(BuildContext context) {
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    } else {
+      //退出APP
+      SystemNavigator.pop();
+    }
   }
 
   ///跳转到首页

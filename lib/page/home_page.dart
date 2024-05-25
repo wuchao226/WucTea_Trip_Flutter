@@ -56,20 +56,27 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     return Column(
       children: [
         shadowWrap(
-            child: Container(
-          height: 60 + top,
-          decoration: BoxDecoration(
-            color: Color.fromARGB((appBarAlpha * 255).toInt(), 255, 255, 255),
+          child: Container(
+            padding: EdgeInsets.only(top: top),
+            height: 60 + top,
+            decoration: BoxDecoration(
+              color: Color.fromARGB((appBarAlpha * 255).toInt(), 255, 255, 255),
+            ),
+            child: SearchBarWidget(
+              searchBarType: appBarAlpha > 0.2 ? SearchBarType.homeLight : SearchBarType.home,
+              inputBoxClick: _jumpToSearch,
+              defaultText: searchBarDefaultText,
+              rightButtonClick: () {
+                LoginDao.logOut();
+              },
+            ),
           ),
-          child: SearchBarWidget(
-            searchBarType: appBarAlpha > 0.2 ? SearchBarType.homeLight : SearchBarType.home,
-            inputBoxClick: _jumpToSearch,
-            defaultText: searchBarDefaultText,
-            rightButtonClick: () {
-              LoginDao.logOut();
-            },
-          ),
-        ))
+        ),
+        // bottom line
+        Container(
+          height: appBarAlpha > 0.2 ? 0.5 : 0,
+          decoration: const BoxDecoration(boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)]),
+        ),
       ],
     );
   }

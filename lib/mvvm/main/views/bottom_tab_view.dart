@@ -18,6 +18,7 @@ class _BottomTabViewState extends State<BottomTabView> {
   final _defaultColor = Colors.grey;
   final _activeColor = Colors.blue;
   int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     // 更新导航器的context，供退出登录时使用
@@ -28,7 +29,7 @@ class _BottomTabViewState extends State<BottomTabView> {
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           HomePage(),
-          SearchPage(),
+          SearchPage(hideLeft: true),
           TravelPage(),
           MyPage(),
         ],
