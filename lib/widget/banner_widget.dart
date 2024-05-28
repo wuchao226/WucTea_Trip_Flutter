@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:trip_flutter/model/home_model.dart';
 import 'package:trip_flutter/util/screen_adapter_helper.dart';
 
+import '../util/navigator_util.dart';
+
 ///封装的艺术之轮播图组件的实现
 class BannerWidget extends StatefulWidget {
   final List<CommonModel> bannerList;
+
   const BannerWidget({super.key, required this.bannerList});
 
   @override
@@ -15,6 +18,7 @@ class BannerWidget extends StatefulWidget {
 class _BannerWidgetState extends State<BannerWidget> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -45,7 +49,7 @@ class _BannerWidgetState extends State<BannerWidget> {
   Widget _tabImage(CommonModel model, double width) {
     return GestureDetector(
       onTap: () {
-        // todo
+        NavigatorUtil.jumpH5(url: model.url, title: model.title, hideAppBar: model.hideAppBar);
       },
       child: Image.network(
         model.icon!,

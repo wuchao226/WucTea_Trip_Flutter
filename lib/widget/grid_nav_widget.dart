@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:trip_flutter/model/home_model.dart';
 
+import '../util/navigator_util.dart';
+
 ///网格卡片
 class GridNavWidget extends StatelessWidget {
   final GridNav gridNavModel;
+
   const GridNavWidget({super.key, required this.gridNavModel});
 
   @override
@@ -89,7 +92,12 @@ class GridNavWidget extends StatelessWidget {
   Widget _wrapGesture(BuildContext context, Widget widget, CommonModel model) {
     return GestureDetector(
       onTap: () {
-        //todo
+        NavigatorUtil.jumpH5(
+          url: model.url,
+          statusBarColor: model.statusBarColor,
+          title: model.title,
+          hideAppBar: model.hideAppBar,
+        );
       },
       child: widget,
     );

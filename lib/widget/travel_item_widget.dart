@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:trip_flutter/model/travel_tab_model.dart';
 
+import '../util/navigator_util.dart';
+
 ///瀑布流卡片
 class TravelItemWidget extends StatelessWidget {
   final TravelItem item;
@@ -13,9 +15,8 @@ class TravelItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //todo
         String? url = _findJumpUrl();
-        // NavigatorUtil.jumpH5(url: url, title: '详情');
+        NavigatorUtil.jumpH5(url: url, title: '详情');
       },
       child: Card(
         child: PhysicalModel(

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trip_flutter/mvvm/login/views/login_page.dart';
 import 'package:trip_flutter/mvvm/main/views/bottom_tab_view.dart';
+import 'package:trip_flutter/util/logger_util.dart';
+
+import '../widget/hi_webview.dart';
 
 class NavigatorUtil {
   ///用于在获取不到context的地方，如dao中跳转页面时使用，需要在TabNavigator赋值
@@ -38,5 +41,33 @@ class NavigatorUtil {
   static goToLogin() {
     // 跳转到登录页并不让返回
     Navigator.pushReplacement(_context!, MaterialPageRoute(builder: (context) => const LoginPage()));
+  }
+
+  ///跳转H5页面
+  static void jumpH5({BuildContext? context, String? url, String? title, bool? hideAppBar, String? statusBarColor}) {
+    BuildContext? safeContext;
+    if (url == null) {
+      LoggerUtil.e('url is null jumpH5 failed.');
+      return;
+    }
+    if (context != null) {
+      safeContext = context;
+    } else if (_context?.mounted ?? false) {
+      safeContext = _context;
+    } else {
+      LoggerUtil.e('context is null jumpH5 failed.');
+      return;
+    }
+    Navigator.push(
+      safeContext!,
+      MaterialPageRoute(
+        builder: (context) => HiWebView(
+          url: url,
+          title: title,
+          hideAppBar: hideAppBar,
+          statusBarColor: statusBarColor,
+        ),
+      ),
+    );
   }
 }

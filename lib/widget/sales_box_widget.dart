@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:trip_flutter/model/home_model.dart';
 
+import '../util/navigator_util.dart';
+
 ///底部卡片入口
 class SalesBoxWidget extends StatelessWidget {
   final SalesBox salesBox;
+
   const SalesBoxWidget({super.key, required this.salesBox});
 
   @override
@@ -76,7 +79,12 @@ class SalesBoxWidget extends StatelessWidget {
     double width = MediaQuery.of(context).size.width / 2 - 10;
     return GestureDetector(
       onTap: () {
-        //todo
+        NavigatorUtil.jumpH5(
+          url: model.url,
+          statusBarColor: model.statusBarColor,
+          title: model.title,
+          hideAppBar: model.hideAppBar,
+        );
       },
       child: Container(
         decoration: BoxDecoration(
