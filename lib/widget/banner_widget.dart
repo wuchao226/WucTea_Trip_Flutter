@@ -17,7 +17,7 @@ class BannerWidget extends StatefulWidget {
 
 class _BannerWidgetState extends State<BannerWidget> {
   int _current = 0;
-  final CarouselController _controller = CarouselController();
+  final CarouselSliderController _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,8 @@ class _BannerWidgetState extends State<BannerWidget> {
   Widget _tabImage(CommonModel model, double width) {
     return GestureDetector(
       onTap: () {
-        NavigatorUtil.jumpH5(url: model.url, title: model.title, hideAppBar: model.hideAppBar);
+        NavigatorUtil.jumpH5(
+            url: model.url, title: model.title, hideAppBar: model.hideAppBar);
       },
       child: Image.network(
         model.icon!,
@@ -71,7 +72,8 @@ class _BannerWidgetState extends State<BannerWidget> {
             margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: (Colors.white).withOpacity(_current == entry.key ? 0.9 : 0.4),
+              color:
+                  (Colors.white).withOpacity(_current == entry.key ? 0.9 : 0.4),
             ),
           ),
         );

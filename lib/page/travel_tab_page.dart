@@ -26,8 +26,11 @@ class _TravelTabPageState extends State<TravelTabPage> with AutomaticKeepAliveCl
   @override
   void initState() {
     _loadData();
+    // 添加一个监听器到_scrollController
     _scrollController.addListener(() {
+      // 检查滚动位置是否已经到达滚动视图的底部
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+        // 如果到达底部，调用_loadData函数加载更多数据
         _loadData(loadMore: true);
       }
     });
